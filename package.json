@@ -19,7 +19,10 @@
   },
   "homepage": "https://github.com/filoxo/vanilla-mapbox-perf-demo#readme",
   "dependencies": {
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.1.0",
     "mapbox-gl": "^0.36.0",
+    "style-loader": "^0.17.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5"
   }

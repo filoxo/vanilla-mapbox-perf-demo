@@ -1,3 +1,6 @@
+import './style.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 function component () {
   var element = document.createElement('div');
 
