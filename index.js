@@ -1,10 +1,10 @@
 import './style.css';
-import { timePeriod } from './data.mock.js';
-import ClusterManager from './cluster';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5jZXN0cnltYXBib3giLCJhIjoiNllqcGhKYyJ9.p9QKjx4kc2E_55jLTmDw0Q';
-const defaultOpts = {
+const options = {
     attributionControl: false,
+    center: [-74.50, 40],
+    container: 'map',
     maxZoom: 6,
     minZoom: 1,
     maxBounds: [[-270, -85], [270, 85]],
@@ -14,60 +14,67 @@ const defaultOpts = {
     style: 'mapbox://styles/ancestrymapbox/cil1ctovd009pavm17fsttysd',
     trackResize: true
 };
-
-const options = Object.assign({ container: 'map', center: [-74.50, 40], zoom: 9 }, defaultOpts);
 const map = new mapboxgl.Map(options);
 
-// Markers
-const { ancestors } = timePeriod;
-let markers = [];
-let markerElements = [];
-const clusterManager = new ClusterManager();
+const LIMIT = 1000;
+const speedTestBtn = document.querySelector('#speedTestBtn');
 
 map.on('load', () => {
-    ancestors.forEach(({birthPlace, deathPlace}, i) => {
-        if ((birthPlace && birthPlace.placeId) || (deathPlace && deathPlace.placeId)) {
-            clusterManager.addNode((birthPlace && birthPlace.placeId) ?
-                birthPlace.coords : deathPlace.coords, i);
-        }
-    })
-})
-map.on('zoom', () => {
-    const level = Math.floor(map.getZoom());
-    getClusters(level);
+    speedTestBtn.addEventListener('click', runTests);
 })
 
-function getClusters(level) {
-    markers.forEach(marker => marker.remove());
-    markerElements.forEach(el => el.remove());
-    markers = [];
-    markerElements = [];
-    const clusters = clusterManager.getClusters(level);
-    clusters.forEach(cluster => {
-        const el = document.createElement('div');
+const startMarkersTest = () => {
+    console.log('Markers test start.');
+    for (let i = 0; i < LIMIT; i++) {
+        // Create dom content
+        let el = document.createElement('div');
         el.className = 'marker';
-        if (cluster.data.length === 1) {
-            const ancestor = timePeriod.ancestors[cluster.data[0]];
-            el.classList.add(ancestor.gender.toLowerCase());
-            let classes = '';
-            if (!ancestor.photoUrl) {
-                classes += 'icon ';
-            }
-            let markerHtml = `<div class="photo photoSizeMarker photoCenter photoCircle ${classes}" role="presentation">`;
-            if (ancestor.photoUrl) {
-                markerHtml += `<img src="${ancestor.photoUrl}"/>`;
-            }
-            markerHtml += '</div>';
-            el.innerHTML = markerHtml;
-        } else {
-            el.innerHTML = '<span>' + cluster.data.length + '</span>';
-        }
+        el.innerHTML = '<span>0</span>';
         // add marker to map
         const marker = new mapboxgl.Marker(el, { offset: [-17, -44] })
-            .setLngLat(cluster.lngLat)
+            .setLngLat([-73.9749, 40.7736])
             .addTo(map);
 
-        markers.push(marker);
-        markerElements.push(el);
-    });
+        setTimeout(() => {
+            // Dereference content
+            el.remove();
+            el = null;
+            // Delete marker
+            marker.remove();
+        });
+    }
+    console.log('Markers test complete.');
+}
+
+const startPopupsTest = () => {
+    console.log('Popups test start.');
+    for (let i = 0; i < LIMIT; i++) {
+        // Create content
+        let domElem = document.createElement('div');
+        domElem.innerHTML = 'TEST CONTENT';
+        // Create popup
+        const popup = new mapboxgl.Popup({ offset: { 'top': [-3, -10], 'bottom': [-3, -40] } })
+            .setLngLat([-96, 37.8])
+            .setDOMContent(domElem)
+            .addTo(map);
+
+        setTimeout(() => {
+            // Dereference content
+            domElem.remove();
+            domElem = null;
+            // Delete popup
+            popup.remove();
+        });
+    }
+    console.log('Popups test complete.');
+}
+
+const deleteMap = () => {
+   map.remove();
+}
+
+const runTests = () => {
+    startMarkersTest();
+    startPopupsTest();
+    deleteMap();
 }
