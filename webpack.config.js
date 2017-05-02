@@ -8,10 +8,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   module: {
-    rules: [{
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({ use: 'css-loader' })
-    }]
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.css$/, use: ExtractTextPlugin.extract({ use: 'css-loader' })}
+    ]
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),

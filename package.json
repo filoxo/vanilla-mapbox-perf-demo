@@ -19,11 +19,16 @@
   },
   "homepage": "https://github.com/filoxo/vanilla-mapbox-perf-demo#readme",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
     "css-loader": "^0.28.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "mapbox-gl": "^0.36.0",
     "style-loader": "^0.17.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.4.0"
   }
 }
