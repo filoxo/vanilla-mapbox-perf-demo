@@ -64,3 +64,52 @@ main {
 .btn.active {
     background:var(--bamboo4);
 }
+/* Marker styles */
+.marker {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #B8D94C;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 28px;
+    font-size: 16px;
+    color: #003A5B;
+    cursor: pointer;
+}
+.marker:hover {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #fff;
+    margin-top: -2px;
+    margin-left: -2px;
+}
+.marker.male {
+    background: #97cfcb;
+}
+.marker.male:before {
+    border-top-color: #97cfcb;
+}
+.marker.female {
+    background: #f49f99;
+}
+.marker.female:before {
+    border-top-color: #f49f99;
+}
+.marker.unknown {
+    background: #d9d9d9;
+}
+.marker.unknown:before {
+    border-top-color: #d9d9d9;
+}
+.marker .photo {
+    margin-top: 2px;
+}
+.photoSizeMarker {
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+}
+.photoSizeMarker.icon::before {
+    font-size: 20px;
+}
