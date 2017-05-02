@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/filoxo/vanilla-mapbox-perf-demo/issues"
   },
-  "homepage": "https://github.com/filoxo/vanilla-mapbox-perf-demo#readme"
+  "homepage": "https://github.com/filoxo/vanilla-mapbox-perf-demo#readme",
+  "dependencies": {
+    "webpack": "^2.4.1"
+  }
 }
