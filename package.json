@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/filoxo/vanilla-mapbox-perf-demo#readme",
   "dependencies": {
+    "mapbox-gl": "^0.36.0",
     "webpack": "^2.4.1"
   }
 }
