@@ -1,2 +1,66 @@
-body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:100%; }
+body {
+    margin:0;
+    padding:0;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    position: relative;
+    width: v100vw;
+}
+#map {
+    flex-grow: 1;
+    flex-basis: auto;
+    width: 100%;
+}
+
+:root {
+    --bamboo2: #9cbe30;
+    --bamboo3: #7a9c0f;
+    --bamboo4: #648200;
+}
+.btn {
+    appearance:none;
+    background-color:var(--bamboo3);
+    background-image:linear-gradient(var(--bamboo2), var(--bamboo3));
+    background-origin:padding-box;
+    border:0;
+    border-radius:3px;
+    box-shadow:inset 0 -1px 1px rgba(0,0,0, .2);
+    color:#fff !important;
+    cursor:pointer;
+    display:inline-block;
+    font-family:inherit;
+    font-size:15px;
+    -webkit-font-smoothing:antialiased;
+    font-style:normal;
+    font-weight:bold;
+    line-height:16.9px;
+    margin: 3px;
+    min-height:30px;
+    padding:6.5px 12px 6px;
+    text-align:center;
+    text-decoration:none !important;
+    text-indent:0;
+    text-shadow:0 0 6px rgba(0,0,0, .2);
+    text-transform:uppercase;
+    transition:.2s padding-left;
+    vertical-align:middle;
+} /* .9/.5 value on line-height and the padding for each size are necessary for FF & Safari */
+.btn::selection {
+    background:transparent;
+}
+.btn span {
+    text-decoration:none !important;
+}
+/* Green (Default) */
+.btn:not(:active):not(.active):hover {
+    background-color:var(--bamboo4);
+    background-image:linear-gradient(var(--bamboo3), var(--bamboo4));
+}
+.btn:active,
+.btn.active {
+    background:var(--bamboo4);
+}
